@@ -12,8 +12,8 @@ export default function Header() {
           onClick={() => navigate('/')} 
           className="flex items-center space-x-3 cursor-pointer select-none group"
         >
-          <div className="flex items-center space-x-2">
-            <div className="w-3 h-3 bg-[#0A0A0A] rounded-[2px] shrink-0" />
+          <div className="flex items-center space-x-2.5">
+            <img src="/logo.jpg" alt="TokenScope Logo" className="w-6 h-6 rounded-full object-cover shrink-0" />
             <span 
               className="text-[15px] font-bold text-[#0A0A0A] tracking-[0.08em]"
               style={{ fontFamily: 'Inter, sans-serif' }}
