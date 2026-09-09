@@ -1,0 +1,48 @@
+{
+  "name": "karak-design",
+  "description": "UI/UX and visual design skills: Apple HIG for iOS 26 / Liquid Glass, Material Design 3, icon design, frontend aesthetics, UX psychology, Hi-Fi design quality, mobile auth screen design, design system, Garrett UX analysis (Strategy/Scope/Structure/Skeleton/Surface 5-layer framework), design-to-code Storybook catalog (code-first component catalog with round-trip design/code governance)",
+  "author": {
+    "name": "karak"
+  },
+  "homepage": "https://github.com/karak-developer/karak-claude-plugin",
+  "repository": "https://github.com/karak-developer/karak-claude-plugin",
+  "license": "MIT",
+  "keywords": [
+    "design",
+    "apple-hig",
+    "ios26",
+    "liquid-glass",
+    "swiftui",
+    "material-design",
+    "icon-design",
+    "frontend",
+    "ux-psychology",
+    "hifi-design",
+    "accessibility",
+    "android",
+    "design-system",
+    "ux-design",
+    "ux-analysis",
+    "information-architecture",
+    "garrett-ux-analysis",
+    "storybook",
+    "design-to-code",
+    "component-catalog",
+    "design-tokens"
+  ],
+  "skills": [
+    "./skills/apple-design",
+    "./skills/icon-design",
+    "./skills/frontend-aesthetics",
+    "./skills/ux-psychologist",
+    "./skills/material-design",
+    "./skills/hifi-design-quality",
+    "./skills/mobile-auth-screen-design",
+    "./skills/design-system",
+    "./skills/garrett-ux-analysis",
+    "./skills/design-to-code-storybook"
+  ],
+  "agents": [
+    "./agents/ui-designer.md"
+  ]
+}

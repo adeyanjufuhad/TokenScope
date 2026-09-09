@@ -1,0 +1,246 @@
+{
+  "name": "karak-dev",
+  "owner": {
+    "name": "karak"
+  },
+  "metadata": {
+    "description": "Design, UX psychology, specialized cloud architecture, Windows Desktop, Node.js backend development, and meta (session-aware) tools for Claude Code",
+    "version": "2.7.0"
+  },
+  "plugins": [
+    {
+      "name": "karak-design",
+      "source": "./karak-design",
+      "description": "UI/UX and visual design skills: Apple HIG for iOS 26 / Liquid Glass, Material Design 3, icon design, frontend aesthetics, UX psychology, Hi-Fi design quality, mobile auth screen design, design system, Garrett UX analysis (Strategy/Scope/Structure/Skeleton/Surface 5-layer framework), design-to-code Storybook catalog (code-first component catalog with round-trip design/code governance)",
+      "version": "1.4.0",
+      "author": {
+        "name": "karak"
+      },
+      "homepage": "https://github.com/karak-developer/karak-claude-plugin",
+      "repository": "https://github.com/karak-developer/karak-claude-plugin",
+      "license": "MIT",
+      "keywords": [
+        "design",
+        "apple-hig",
+        "ios26",
+        "liquid-glass",
+        "swiftui",
+        "material-design",
+        "icon-design",
+        "frontend",
+        "ux-psychology",
+        "hifi-design",
+        "accessibility",
+        "android",
+        "design-system",
+        "ux-design",
+        "ux-analysis",
+        "information-architecture",
+        "garrett-ux-analysis",
+        "storybook",
+        "design-to-code",
+        "component-catalog",
+        "design-tokens"
+      ],
+      "category": "development",
+      "tags": [
+        "design-system",
+        "ux",
+        "ios",
+        "android",
+        "material-design",
+        "web",
+        "hifi-design",
+        "ux-analysis",
+        "ux-strategy",
+        "information-architecture",
+        "liquid-glass",
+        "swiftui",
+        "storybook",
+        "design-to-code",
+        "component-catalog"
+      ]
+    },
+    {
+      "name": "karak-architecture",
+      "source": "./karak-architecture",
+      "description": "System architecture skills: C4 model diagrams, ADR, architecture decision records, system design, GCP infrastructure, architecture-principles (modernization / Team Topologies / evolutionary architecture / DORA), Thoughtworks Tech Radar structural index + themes (volume-stamped)",
+      "version": "1.2.0",
+      "author": {
+        "name": "karak"
+      },
+      "homepage": "https://github.com/karak-developer/karak-claude-plugin",
+      "repository": "https://github.com/karak-developer/karak-claude-plugin",
+      "license": "MIT",
+      "keywords": [
+        "architecture",
+        "c4-model",
+        "cloud-architecture",
+        "gcp",
+        "adr",
+        "decision-record",
+        "architecture-modernization",
+        "team-topologies",
+        "evolutionary-architecture",
+        "dora",
+        "four-keys",
+        "fitness-functions",
+        "bvssh",
+        "platform-engineering",
+        "ddd",
+        "wardley-mapping",
+        "thoughtworks-tech-radar",
+        "tech-radar",
+        "industry-signals"
+      ],
+      "category": "development",
+      "tags": [
+        "architecture",
+        "c4-model",
+        "plantuml",
+        "cloud",
+        "gcp",
+        "adr",
+        "decision-record",
+        "architecture-modernization",
+        "team-topologies",
+        "evolutionary-architecture",
+        "dora",
+        "platform-engineering",
+        "ddd",
+        "wardley-mapping",
+        "tech-radar"
+      ]
+    },
+    {
+      "name": "karak-engineering",
+      "source": "./karak-engineering",
+      "description": "Code quality, review, and design doc skills: Codex-based code review with session resume, Google design docs, code refactoring, QA management, and Node.js 24 backend development (Express, Drizzle/Prisma, Vitest, tsup)",
+      "version": "1.1.0",
+      "author": {
+        "name": "karak"
+      },
+      "homepage": "https://github.com/karak-developer/karak-claude-plugin",
+      "repository": "https://github.com/karak-developer/karak-claude-plugin",
+      "license": "MIT",
+      "keywords": [
+        "code-review",
+        "code-quality",
+        "google-design-docs",
+        "nodejs",
+        "typescript",
+        "express",
+        "drizzle",
+        "prisma",
+        "vitest",
+        "tsup",
+        "backend",
+        "rest-api"
+      ],
+      "category": "development",
+      "tags": [
+        "code-quality",
+        "code-review",
+        "google-design-docs",
+        "nodejs",
+        "typescript",
+        "backend",
+        "express",
+        "drizzle",
+        "vitest"
+      ]
+    },
+    {
+      "name": "karak-product",
+      "source": "./karak-product",
+      "description": "Product management agents: requirements analysis, agile project management",
+      "version": "1.0.0",
+      "author": {
+        "name": "karak"
+      },
+      "homepage": "https://github.com/karak-developer/karak-claude-plugin",
+      "repository": "https://github.com/karak-developer/karak-claude-plugin",
+      "license": "MIT",
+      "keywords": [
+        "product-management",
+        "requirements",
+        "agile"
+      ],
+      "category": "development",
+      "tags": [
+        "product-management",
+        "agile",
+        "requirements"
+      ]
+    },
+    {
+      "name": "karak-windows-desktop",
+      "source": "./karak-windows-desktop",
+      "description": "Windows Desktop development skills: .NET 10 WPF/XAML, MVVM, Clean Architecture, Vertical Slice, MSIX packaging/signing/CI, Serilog diagnostics, EF Core migration (SQLite offline-safe), performance profiling, xUnit/Moq testing, dotnet-windows-developer agent",
+      "version": "1.0.0",
+      "author": {
+        "name": "karak"
+      },
+      "homepage": "https://github.com/karak-developer/karak-claude-plugin",
+      "repository": "https://github.com/karak-developer/karak-claude-plugin",
+      "license": "MIT",
+      "keywords": [
+        "dotnet",
+        "wpf",
+        "xaml",
+        "mvvm",
+        "csharp",
+        "windows-desktop",
+        "clean-architecture",
+        "vertical-slice",
+        "msix",
+        "serilog",
+        "ef-core",
+        "performance",
+        "prism",
+        "xunit",
+        "moq",
+        "dapper",
+        "community-toolkit"
+      ],
+      "category": "development",
+      "tags": [
+        "dotnet",
+        "wpf",
+        "windows",
+        "mvvm",
+        "csharp",
+        "desktop",
+        "xunit",
+        "testing"
+      ]
+    },
+    {
+      "name": "karak-meta",
+      "source": "./karak-meta",
+      "description": "Meta-skills that observe the Claude Code session itself: Stop-hook gated learning-candidate recording, session-pointer breadcrumbs into auto-memory",
+      "version": "1.0.0",
+      "author": {
+        "name": "karak"
+      },
+      "homepage": "https://github.com/karak-developer/karak-claude-plugin",
+      "repository": "https://github.com/karak-developer/karak-claude-plugin",
+      "license": "MIT",
+      "keywords": [
+        "meta",
+        "stop-hook",
+        "memory",
+        "learning",
+        "session-log",
+        "breadcrumb",
+        "auto-memory"
+      ],
+      "category": "productivity",
+      "tags": [
+        "hooks",
+        "memory",
+        "session"
+      ]
+    }
+  ]
+}
