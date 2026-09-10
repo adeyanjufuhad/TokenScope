@@ -5,6 +5,19 @@ export default function ShareButton() {
   const [copied, setCopied] = useState(false);
 
   const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'TokenScope Token Audit Report',
+          text: 'Comprehensive Solana Token Due Diligence & Risk Report',
+          url: window.location.href,
+        });
+        return;
+      } catch (err) {
+        if (err.name === 'AbortError') return;
+      }
+    }
+
     try {
       await navigator.clipboard.writeText(window.location.href);
       setCopied(true);

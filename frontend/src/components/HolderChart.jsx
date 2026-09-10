@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Chart as ChartJS } from 'chart.js/auto';
 import { truncateAddress } from '../services/api';
 import { ExternalLink, Copy, Check } from 'lucide-react';
 
@@ -20,8 +21,8 @@ export default function HolderChart({ holders = [] }) {
   useEffect(() => {
     if (!hasData || !canvasRef.current) return;
 
-    // Check for Chart constructor on window
-    const Chart = window.Chart;
+    // Use bundled ChartJS or fallback to window.Chart
+    const Chart = ChartJS || window.Chart;
     if (!Chart) return;
 
     // Clean up existing instance before re-creating

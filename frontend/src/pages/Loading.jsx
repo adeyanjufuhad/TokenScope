@@ -19,7 +19,9 @@ export default function Loading() {
   const mintAddress = location.state?.mintAddress || '';
 
   const [currentStep, setCurrentStep] = useState(0);
+  const [pollError, setPollError] = useState(null);
   const pollTimerRef = useRef(null);
+  const pollAttemptsRef = useRef(0);
 
   // Progressive checklist animation across the 6 pillars
   useEffect(() => {
@@ -33,14 +35,29 @@ export default function Loading() {
     return () => clearInterval(timer);
   }, []);
 
-  // Poll GET /api/v1/report/{report_id} every 2 seconds
+  // Poll GET /api/v1/report/{report_id} every 2 seconds (with 40s timeout)
   useEffect(() => {
     let isMounted = true;
 
     const poll = async () => {
+      pollAttemptsRef.current += 1;
+      
+      // Safety timeout after 25 attempts (~50s)
+      if (pollAttemptsRef.current > 25) {
+        if (isMounted) {
+          setPollError('Audit timed out. Solana RPC or market APIs took too long to respond.');
+        }
+        return;
+      }
+
       try {
         const report = await getReport(report_id);
         if (!isMounted) return;
+
+        if (report && report.status === 'failed') {
+          setPollError(report.message || 'Audit failed to complete. Please check the token address and try again.');
+          return;
+        }
 
         if (report && report.status !== 'processing' && report.report_id) {
           setCurrentStep(PILLARS.length);
@@ -54,6 +71,11 @@ export default function Loading() {
         }
       } catch (err) {
         if (!isMounted) return;
+        // If report is 404 or failed on server
+        if (pollAttemptsRef.current > 5 && err.message?.includes('not found')) {
+          setPollError('Audit report was not found. Please initiate a new audit.');
+          return;
+        }
         pollTimerRef.current = setTimeout(poll, 2000);
       }
     };
@@ -89,58 +111,74 @@ export default function Loading() {
             className="text-[20px] font-semibold text-[#0A0A0A] mt-5"
             style={{ fontFamily: 'Inter, sans-serif' }}
           >
-            Auditing token
+            {pollError ? 'Unable to complete audit' : 'Auditing token'}
           </h2>
 
-          {/* c) Subheading */}
-          <p 
-            className="text-[14px] text-[#6B7280] mt-1"
-            style={{ fontFamily: 'Inter, sans-serif' }}
-          >
-            Fetching onchain data and running risk analysis...
-          </p>
+          {/* c) Subheading or Error UI */}
+          {pollError ? (
+            <div className="mt-3">
+              <p className="text-[14px] text-[#DC2626] bg-[#FEF2F2] border border-[#FEE2E2] p-3 rounded-[8px] mb-5">
+                {pollError}
+              </p>
+              <button
+                onClick={() => navigate('/')}
+                className="w-full py-2.5 bg-[#0A0A0A] hover:bg-[#1F2937] text-white text-[13px] font-medium rounded-[8px] transition-colors cursor-pointer"
+              >
+                ← Return to audit terminal
+              </button>
+            </div>
+          ) : (
+            <>
+              <p 
+                className="text-[14px] text-[#6B7280] mt-1"
+                style={{ fontFamily: 'Inter, sans-serif' }}
+              >
+                Fetching onchain data and running risk analysis...
+              </p>
 
-          {/* d) 6 Checklist Items */}
-          <div className="mt-6 space-y-3.5">
-            {PILLARS.map((pillar, idx) => {
-              const isCompleted = idx < currentStep;
-              const isActive = idx === currentStep;
+              {/* d) 6 Checklist Items */}
+              <div className="mt-6 space-y-3.5">
+                {PILLARS.map((pillar, idx) => {
+                  const isCompleted = idx < currentStep;
+                  const isActive = idx === currentStep;
 
-              return (
-                <div key={pillar.name} className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    {/* Circle Indicator (20px) */}
-                    {isCompleted ? (
-                      <div className="w-5 h-5 rounded-full bg-[#0A0A0A] flex items-center justify-center shrink-0">
-                        <Check size={12} strokeWidth={2.5} className="text-white" />
+                  return (
+                    <div key={pillar.name} className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        {/* Circle Indicator (20px) */}
+                        {isCompleted ? (
+                          <div className="w-5 h-5 rounded-full bg-[#0A0A0A] flex items-center justify-center shrink-0">
+                            <Check size={12} strokeWidth={2.5} className="text-white" />
+                          </div>
+                        ) : isActive ? (
+                          <div className="w-5 h-5 rounded-full border-[2px] border-[#0A0A0A] border-t-transparent animate-spin-custom shrink-0" />
+                        ) : (
+                          <div className="w-5 h-5 rounded-full border-[2px] border-[#E5E7EB] shrink-0" />
+                        )}
+
+                        {/* Pillar Name */}
+                        <span 
+                          className={`text-[14px] font-medium ${
+                            isCompleted || isActive ? 'text-[#0A0A0A]' : 'text-[#9CA3AF]'
+                          }`}
+                          style={{ fontFamily: 'Inter, sans-serif' }}
+                        >
+                          {pillar.name}
+                        </span>
                       </div>
-                    ) : isActive ? (
-                      <div className="w-5 h-5 rounded-full border-[2px] border-[#0A0A0A] border-t-transparent animate-spin-custom shrink-0" />
-                    ) : (
-                      <div className="w-5 h-5 rounded-full border-[2px] border-[#E5E7EB] shrink-0" />
-                    )}
 
-                    {/* Pillar Name */}
-                    <span 
-                      className={`text-[14px] font-medium ${
-                        isCompleted || isActive ? 'text-[#0A0A0A]' : 'text-[#9CA3AF]'
-                      }`}
-                      style={{ fontFamily: 'Inter, sans-serif' }}
-                    >
-                      {pillar.name}
-                    </span>
-                  </div>
-
-                  {/* Far right: Elapsed Time in IBM Plex Mono 12px */}
-                  {isCompleted && (
-                    <span className="font-mono text-[12px] text-[#9CA3AF]">
-                      {pillar.time}
-                    </span>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+                      {/* Far right: Elapsed Time in IBM Plex Mono 12px */}
+                      {isCompleted && (
+                        <span className="font-mono text-[12px] text-[#9CA3AF]">
+                          {pillar.time}
+                        </span>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </>
+          )}
 
           {/* e) Bottom Divider & Cache note */}
           <div className="mt-8 pt-4 border-t border-[#E5E7EB] text-center">

@@ -21,3 +21,18 @@ CREATE TABLE IF NOT EXISTS tokens (
     symbol TEXT NOT NULL,
     last_audited_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Row-Level Security (RLS) Policies
+-- Required for Supabase projects where RLS is enabled by default
+
+ALTER TABLE reports ENABLE ROW LEVEL SECURITY;
+ALTER TABLE tokens ENABLE ROW LEVEL SECURITY;
+
+-- Allow public read access on reports and tokens
+CREATE POLICY "Allow public read access on reports" ON reports FOR SELECT USING (true);
+CREATE POLICY "Allow public read access on tokens" ON tokens FOR SELECT USING (true);
+
+-- Allow backend (anon key) to insert/upsert reports and tokens
+CREATE POLICY "Allow public insert access on reports" ON reports FOR INSERT WITH CHECK (true);
+CREATE POLICY "Allow public insert/update access on tokens" ON tokens FOR ALL USING (true);
+

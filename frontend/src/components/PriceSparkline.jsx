@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Chart as ChartJS } from 'chart.js/auto';
 
 export default function PriceSparkline({ prices = [] }) {
   const canvasRef = useRef(null);
@@ -10,7 +11,7 @@ export default function PriceSparkline({ prices = [] }) {
   useEffect(() => {
     if (!hasData || !canvasRef.current) return;
 
-    const Chart = window.Chart;
+    const Chart = ChartJS || window.Chart;
     if (!Chart) return;
 
     if (chartInstanceRef.current) {
