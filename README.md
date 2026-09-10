@@ -291,7 +291,32 @@ npm run build
 3. Set **Root Directory** to `frontend`.
 4. The included `frontend/vercel.json` will automatically handle SPA client routing.
 
-### Backend (Railway / Render / Docker)
+### Backend (Render)
+**Option A — Automated Blueprint (Recommended)**:
+1. Log in to [Render](https://dashboard.render.com/).
+2. Click **New +** &rarr; **Blueprint**.
+3. Connect your `TokenScope` repository.
+4. Render will automatically read [`render.yaml`](render.yaml) and configure the Python web service, build command, health check (`/health`), and port.
+5. Fill in your secret environment variables (`GEMINI_API_KEY`, etc.) and click **Apply**.
+
+**Option B — Manual Web Service**:
+1. In Render, click **New +** &rarr; **Web Service**.
+2. Select your repository `https://github.com/adeyanjufuhad/TokenScope`.
+3. Configure service settings:
+   - **Name**: `tokenscope-backend`
+   - **Root Directory**: `backend`
+   - **Runtime**: `Python 3`
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+4. Add Environment Variables:
+   - `PYTHON_VERSION`: `3.11.9`
+   - `SOLANA_RPC_URL`: `https://rpc.ankr.com/solana`
+   - `GEMINI_API_KEY`: *(your Gemini API key)*
+   - `SUPABASE_URL`: *(optional)*
+   - `SUPABASE_ANON_KEY`: *(optional)*
+5. Click **Create Web Service**. Render will deploy your API and provide a live `https://tokenscope-backend.onrender.com` URL.
+
+### Backend (Railway / Docker)
 1. Import repository into Railway.
 2. Set **Root Directory** to `backend`.
 3. Configuration is handled automatically via `backend/railway.json` and `backend/Procfile`.
